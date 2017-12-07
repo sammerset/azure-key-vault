@@ -2,6 +2,7 @@ require 'key_vault/auth'
 require 'key_vault/url'
 require 'key_vault/api_version'
 require 'rest-client'
+require 'json'
 
 module KeyVault
   class Client
