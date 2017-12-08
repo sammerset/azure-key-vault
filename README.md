@@ -10,11 +10,11 @@ Ruby wrapper for Azure Key Vault REST API
 
 `vault = KeyVault::Client.new(<vault name>, bearer_token)`
 or 
-`vault = KeyVault::Client.new(<vault name>, bearer_token, api_version: <api_version>`
+`vault = KeyVault::Client.new(<vault name>, bearer_token, api_version: <api_version>)`
 
 ### Get the most recent version of a secret
 
-`vault.get_secret(<secret name>)`
+`vault.get_secret <secret name> `
 
 ### Get a specific version of a secret
 
