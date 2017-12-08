@@ -1,9 +1,7 @@
 require 'spec_helper'
 
-describe KeyVault::Version do
-  let(:version) { KeyVault::Version::VERSION }
-  
+describe 'KeyVault::VERSION' do
   it 'gets the correct version' do 
-    expect(version).to eq '0.0.7'
+    expect(KeyVault::VERSION).to eq '0.0.8'
   end
 end

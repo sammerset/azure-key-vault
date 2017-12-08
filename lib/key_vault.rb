@@ -6,15 +6,18 @@ require 'json'
 
 module KeyVault
   class Client
-    def initialize(vault_name, api_version, bearer_token)
+    
+    attr_reader :api_version
+
+    def initialize(vault_name, bearer_token, api_version: DEFAULT_API_VERSION)
       @vault_name = vault_name
-      @api_version = api_version || ApiVersion::DEFAULT_API_VERSION
+      @api_version = api_version || DEFAULT_API_VERSION
       @bearer_token = bearer_token
       @vault_url = Url.new(@bearer_token, @vault_name)
     end
     
-    def get_secret(secret_name, secret_version, api_version = @api_version)
-      response = RestClient.get(@vault_url.get_url(secret_name, secret_version, api_version), {:Authorization => @bearer_token})
+    def get_secret(secret_name, secret_version=nil)
+      response = RestClient.get(@vault_url.get_url(secret_name, secret_version, @api_version), {:Authorization => @bearer_token})
       JSON.parse(response)['value']
     end
       

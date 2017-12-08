@@ -1,5 +1,3 @@
 module KeyVault
-  class Version
-    VERSION = '0.0.7'
-  end
+  VERSION = '0.0.8'
 end
