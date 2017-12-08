@@ -1,0 +1,48 @@
+require 'spec_helper'
+describe KeyVault::Client do
+  let(:vault_name) {'the-vault'}
+  let(:api_version) {'2016-10-01'}
+  let(:bearer_token) {'Bearer tokenvalue'}
+  let(:client) {client = KeyVault::Client.new(vault_name,api_version,bearer_token)}
+  let(:secret_url) {"https://#{vault_name}.vault.azure.net/secrets/#{secret_name}?api-version=#{api_version}"}
+
+  it 'requires vault_name, api_version and bearer_token' do
+    client = KeyVault::Client.new(vault_name,api_version,bearer_token)
+    expect(client).not_to be_nil
+  end
+
+  describe 'get_secret' do
+    let(:secret_name) {'the-secret'}
+    let(:secret_value) {'top secret'}
+    let(:valid_response) {%Q[{
+      "value": "#{secret_value}",
+      "contentType": "String",
+      "id": "https://#{vault_name}.vault.azure.net/secrets/#{secret_name}/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "attributes": {
+        "enabled": true,
+        "created": 1512680041,
+        "updated": 1512680041,
+        "recoveryLevel": "Purgeable"
+      }
+    }]}
+    let(:rest_request) {
+      class_double('RestClient')
+        .as_stubbed_const(:transfer_nested_constants => true)
+    }
+
+    it 'should request GET from secret url' do
+      expect(rest_request).to receive(:get)
+        .with(secret_url,{:Authorization => bearer_token})
+        .and_return(valid_response)
+      client.get_secret(secret_name,nil,api_version)
+    end
+
+    it 'should return secret value from response' do
+      expect(rest_request).to receive(:get)
+        .and_return(valid_response)
+      returned_secret = client.get_secret(secret_name,nil,api_version)
+      expect(returned_secret).to eq secret_value
+    end
+
+  end
+end
