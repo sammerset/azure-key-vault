@@ -8,9 +8,15 @@ module KeyVault
     end
     
     def get_bearer_token
-      result = RestClient::Request.execute(method: :post, url: auth_url, payload: auth_body(@client_id, @client_secret), headers: get_headers)
-      token_resp = JSON.parse(result)
-      "Bearer #{token_resp['access_token']}"
+      begin
+        result = RestClient::Request.execute(method: :post, url: auth_url, payload: auth_body(@client_id, @client_secret), headers: get_headers)
+        token_resp = JSON.parse(result)
+        "Bearer #{token_resp['access_token']}"
+      rescue RestClient::BadRequest 
+        raise ArgumentError, "Could not authenticate to Azure with supplied arguments (Bad Request)"
+      rescue RestClient::Unauthorized
+        raise KeyVault::Unauthorized, "Not authorised for Azure API with supplied credentials"
+      end
     end
     
     def get_headers

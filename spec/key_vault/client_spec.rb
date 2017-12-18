@@ -55,6 +55,13 @@ describe KeyVault::Client do
         returned_secret = client.get_secret secret_name
         expect(returned_secret).to eq secret_value
       end
+
+      it 'should return nil if secret not found' do
+        expect(rest_request).to receive(:get).and_raise(RestClient::NotFound)
+        returned_secret = client.get_secret 'not-a-secret'
+        expect(returned_secret).to be_nil
+      end
+
     end
 
     context 'request version of secret' do
@@ -69,5 +76,6 @@ describe KeyVault::Client do
         client.get_secret(secret_name,secret_version)
       end
     end
+
   end
 end
