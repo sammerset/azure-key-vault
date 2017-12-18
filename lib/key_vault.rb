@@ -1,5 +1,6 @@
 require 'key_vault/auth'
 require 'key_vault/url'
+require 'key_vault/exceptions'
 require 'key_vault/api_version'
 require 'rest-client'
 require 'json'
@@ -17,8 +18,12 @@ module KeyVault
     end
     
     def get_secret(secret_name, secret_version=nil)
-      response = RestClient.get(@vault_url.get_url(secret_name, secret_version, @api_version), {:Authorization => @bearer_token})
-      JSON.parse(response)['value']
+      begin
+        response = RestClient.get(@vault_url.get_url(secret_name, secret_version, @api_version), {:Authorization => @bearer_token})
+        JSON.parse(response)['value']
+      rescue RestClient::NotFound
+        return nil
+      end
     end
       
     def create_secret(secret_name, secret_value)

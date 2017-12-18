@@ -9,7 +9,7 @@ describe KeyVault::Auth do
     expect(auth).not_to be_nil
   end
 
-  describe 'get_bearer_token' do
+  describe '.get_bearer_token' do
     let(:auth) {KeyVault::Auth.new(tenant_id,client_id, client_secret)}
     let(:auth_url) {"https://login.windows.net/#{tenant_id}/oauth2/token"}
     let(:access_token) {'theaccesstoken'}
@@ -28,6 +28,16 @@ describe KeyVault::Auth do
     it 'should authenticate to microsoft rest api' do
       expect(rest_request).to receive(:execute).and_return(auth_response)
       auth.get_bearer_token
+    end
+
+    it 'should raise argument error if bad request is returned' do
+      expect(rest_request).to receive(:execute).and_raise(RestClient::BadRequest)
+      expect{auth.get_bearer_token}.to raise_error(ArgumentError)
+    end
+
+    it 'should raise custom unauthorized if unauthorixed is raised' do
+      expect(rest_request).to receive(:execute).and_raise(RestClient::Unauthorized)
+      expect{auth.get_bearer_token}.to raise_error(KeyVault::Unauthorized)
     end
 
     it 'should post credentials in the request payload' do
