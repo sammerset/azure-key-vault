@@ -11,6 +11,7 @@ module KeyVault
         base_url << "/#{version}"
       end
       base_url << get_api_version_string(api_version)
+      URI.encode base_url
     end
       
     def get_body(secret_value)
