@@ -69,7 +69,6 @@ describe KeyVault::Client do
       let(:secret_url) {"https://#{vault_name}.vault.azure.net/secrets/#{secret_name}/#{secret_version}?api-version=#{api_version}"}
       
       it 'should request passed in version of secret' do
-        puts "URL: #{secret_url}"
         expect(rest_request).to receive(:get)
           .with(secret_url,{:Authorization => bearer_token})
           .and_return(valid_response)
