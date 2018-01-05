@@ -18,8 +18,9 @@ module KeyVault
     end
     
     def get_secret(secret_name, secret_version=nil)
+      clean_name = secret_name.gsub /[^a-zA-Z0-9-]/, '-'
       begin
-        response = RestClient.get(@vault_url.get_url(secret_name, secret_version, @api_version), {:Authorization => @bearer_token})
+        response = RestClient.get(@vault_url.get_url(clean_name, secret_version, @api_version), {:Authorization => @bearer_token})
         JSON.parse(response)['value']
       rescue RestClient::NotFound
         return nil
