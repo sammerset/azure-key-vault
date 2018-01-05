@@ -21,7 +21,7 @@ module KeyVault
       begin
         response = RestClient.get(@vault_url.get_url(secret_name, secret_version, @api_version), {:Authorization => @bearer_token})
         JSON.parse(response)['value']
-      rescue RestClient::ResourceNotFound
+      rescue RestClient::NotFound
         return nil
       end
     end
