@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    azure-key-vault (0.0.11)
-      json (~> 2.1)
+    azure-key-vault (0.0.14)
+      json_pure (~> 2.1)
       rest-client (~> 2.0)
 
 GEM
@@ -13,7 +13,7 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
-    json (2.1.0)
+    json_pure (2.1.0)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)

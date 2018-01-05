@@ -62,6 +62,17 @@ describe KeyVault::Client do
         expect(returned_secret).to be_nil
       end
 
+      it 'should translate non alphanumerics and spaces to hyphens' do
+        secret_key = 'a secret::with!#&$chars-and-1234567890'
+        clean_secret_key = 'a-secret--with----chars-and-1234567890'
+        clean_secret_url = "https://#{vault_name}.vault.azure.net/secrets/#{clean_secret_key}?api-version=#{api_version}"
+
+        expect(rest_request).to receive(:get)
+          .with(clean_secret_url,{:Authorization => bearer_token})
+          .and_return(valid_response)
+        client.get_secret secret_key
+      end
+
     end
 
     context 'request version of secret' do

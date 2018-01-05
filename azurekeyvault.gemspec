@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.files = %x[git ls-files].split($/) - %w[.gitignore]
   s.require_paths = %w[lib]
 
-  s.add_runtime_dependency 'json',  '~>2.1'
+  s.add_runtime_dependency 'json_pure',  '~>2.1'
   s.add_runtime_dependency 'rest-client', '~>2.0' 
 
   s.add_development_dependency "bundler", "~> 1.12"
