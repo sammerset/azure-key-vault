@@ -57,7 +57,7 @@ describe KeyVault::Client do
       end
 
       it 'should return nil if secret not found' do
-        expect(rest_request).to receive(:get).and_raise(RestClient::NotFound)
+        expect(rest_request).to receive(:get).and_raise(RestClient::ResourceNotFound)
         returned_secret = client.get_secret 'not-a-secret'
         expect(returned_secret).to be_nil
       end
