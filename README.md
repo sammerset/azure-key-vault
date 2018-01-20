@@ -4,18 +4,17 @@ Ruby wrapper for Azure Key Vault REST API
 ## Examples
 
 ### Get an access token
-`bearer_token = KeyVault::Auth.new(<tenant id>, <client id>, <client secret>).get_bearer_token`
+`bearer_token = KeyVault::Auth.new(tenant_id, client_id, client_secret).get_bearer_token`
 
-### Get an existing key vault
+### Get client for and existing Azure Key Vault
+`vault = KeyVault::Client.new(vault_name, bearer_token)`
 
-`vault = KeyVault::Client.new(<vault name>, bearer_token)`
 or 
-`vault = KeyVault::Client.new(<vault name>, bearer_token, api_version: <api_version>)`
+
+`vault = KeyVault::Client.new(vault_name, bearer_token, api_version: '<other _api_version>')`
 
 ### Get the most recent version of a secret
-
-`vault.get_secret <secret name> `
+`vault.get_secret(secret_name)`
 
 ### Get a specific version of a secret
-
-`vault.get_secret(<secret name>, <secret version>)`
+`vault.get_secret(secret_name, secret_version)`
