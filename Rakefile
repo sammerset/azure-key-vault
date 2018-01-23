@@ -1,4 +1,4 @@
-require "bundler/gem_tasks"
+require 'bundler/gem_tasks'
 require 'rake/testtask'
 require 'rdoc/task'
 
@@ -13,7 +13,7 @@ rescue LoadError
 end
 
 RDoc::Task.new do |rdoc|
-  rdoc.rdoc_dir = 'doc/rdocs'
-  rdoc.main = "README.md"
-  rdoc.rdoc_files.include("README.md", "lib")
+  rdoc.rdoc_dir = 'doc'
+  rdoc.main = 'README.md'
+  rdoc.rdoc_files.include('README.md', 'lib')
 end

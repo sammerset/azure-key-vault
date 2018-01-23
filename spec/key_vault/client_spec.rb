@@ -9,7 +9,7 @@ describe KeyVault::Client do
     client = KeyVault::Client.new(vault_name, bearer_token)
     expect(client).not_to be_nil
   end
-
+  
   it 'defaults api_version' do
     client = KeyVault::Client.new(vault_name, bearer_token)
     expect(client.api_version).to eq KeyVault::DEFAULT_API_VERSION

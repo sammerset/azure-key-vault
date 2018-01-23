@@ -9,7 +9,7 @@ Ruby wrapper for Azure Key Vault REST API
 ### Get client for and existing Azure Key Vault
 `vault = KeyVault::Client.new(vault_name, bearer_token)`
 
-or 
+or
 
 `vault = KeyVault::Client.new(vault_name, bearer_token, api_version: '<other _api_version>')`
 

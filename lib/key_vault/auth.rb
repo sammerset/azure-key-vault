@@ -14,9 +14,9 @@ module KeyVault
     end
     
     # Authenticates with Azure using OAUTH 2.0
-    # Returns:
+    # ==== Returns:
     # A string containing the bearer token for insertion into request headers
-    # Raises:
+    # ==== Raises:
     # +ArgumentError+:: If the authentication request format is invalid
     # +KeyVault::Unauthorized+:: If authentication fails authorization 
     def get_bearer_token
@@ -31,7 +31,7 @@ module KeyVault
       end
     end
     
-    private 
+    private
     def get_headers
       {"Content-Type" => "application/x-www-form-urlencoded"}
     end

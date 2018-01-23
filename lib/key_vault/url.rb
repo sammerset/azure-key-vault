@@ -1,7 +1,7 @@
 module KeyVault
-  # :category: Internal
   # Helper for Key Vault URL's and REST document bodies
-  class Url 
+  # :category: Internal
+  class Url
     # Creates URL for keyvault from +bearer_token+ and +vault_name+
     def initialize(bearer_token, vault_name)
       @bearer_token = bearer_token
@@ -24,7 +24,7 @@ module KeyVault
     end
     
     private
-    # Returns url for the key vault     
+    # Returns url for the key vault
     def base_secret_url
       "https://#{@vault_name}.vault.azure.net/secrets/%{secret_name}"
     end
