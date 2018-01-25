@@ -1,3 +1,4 @@
 module KeyVault
-  VERSION = '0.0.14'
+  # Version number of this gem
+  VERSION = '0.0.15'.freeze
 end

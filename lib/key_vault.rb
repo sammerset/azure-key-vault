@@ -1,34 +1,9 @@
+require 'key_vault/version'
+require 'key_vault/client'
 require 'key_vault/auth'
-require 'key_vault/url'
-require 'key_vault/exceptions'
-require 'key_vault/api_version'
-require 'rest-client'
-require 'json'
 
+# Provides a simple Ruby interface for the Azure Key Vault REST API
 module KeyVault
-  class Client
-    
-    attr_reader :api_version
-
-    def initialize(vault_name, bearer_token, api_version: DEFAULT_API_VERSION)
-      @vault_name = vault_name
-      @api_version = api_version || DEFAULT_API_VERSION
-      @bearer_token = bearer_token
-      @vault_url = Url.new(@bearer_token, @vault_name)
-    end
-    
-    def get_secret(secret_name, secret_version=nil)
-      clean_name = secret_name.gsub /[^a-zA-Z0-9-]/, '-'
-      begin
-        response = RestClient.get(@vault_url.get_url(clean_name, secret_version, @api_version), {:Authorization => @bearer_token})
-        JSON.parse(response)['value']
-      rescue RestClient::NotFound
-        return nil
-      end
-    end
-      
-    def create_secret(secret_name, secret_value)
-      RestClient.put(@vault_url.get_url(secret_name, nil, @api_version), @vault_url.get_body(secret_value), {"Content-Type" => "application/json", "Authorization" => @bearer_token})
-    end
-  end
+  # The default Azure REST API version
+  DEFAULT_API_VERSION = '2016-10-01'.freeze
 end
