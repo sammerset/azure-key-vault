@@ -1,4 +1,7 @@
 # azure-key-vault
+
+[![Gem Version](https://badge.fury.io/rb/azure-key-vault.svg)](https://badge.fury.io/rb/azure-key-vault)
+
 Ruby wrapper for Azure Key Vault REST API
 
 ## Examples
