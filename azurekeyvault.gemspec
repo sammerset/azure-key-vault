@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.email     = 'mike.scott2@hiscox.com'
   s.authors   = ['Mike Scott']
   s.has_rdoc  = false
+  s.license   = 'MIT'
 
   s.files = (%x[git ls-files]).split($RS) - %w[.gitignore]
   s.require_paths = %w[lib]
