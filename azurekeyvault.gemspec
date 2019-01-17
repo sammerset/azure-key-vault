@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version   = KeyVault::VERSION.split(/[-+]/, 2).first
   s.date      = Time.now.strftime('%Y-%m-%d')
   s.summary   = 'Ruby Client for Azure Key Vault'
-  s.homepage  = 'http://bitbucket.com/hiscoxpsg/azure-key-vault'
+  s.homepage  = 'https://github.com/MikeAScott/azure-key-vault'
   s.email     = 'mike.scott2@hiscox.com'
   s.authors   = ['Mike Scott']
   s.has_rdoc  = false
